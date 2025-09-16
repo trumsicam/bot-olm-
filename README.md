@@ -1,5 +1,8 @@
-[frontend_App_Version2.js](https://github.com/user-attachments/files/22366395/frontend_App_Version2.js)
+
+[frontend_App_Version4.js](https://github.com/user-attachments/files/22366518/frontend_App_Version4.js)
 import React, { useState } from "react";
+import "./App.css";
+
 function App() {
   const [url, setUrl] = useState("");
   const [answer, setAnswer] = useState("");
@@ -20,23 +23,43 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: "auto", padding: 32 }}>
-      <h2>Bot Giải Bài Tập Tự Động</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Dán link bài tập vào đây..."
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          style={{ width: "80%", marginRight: 8 }}
-          required
-        />
-        <button type="submit">Giải</button>
-      </form>
-      <div style={{ marginTop: 32 }}>
-        {loading ? "Đang giải..." : <b>Đáp án: {answer}</b>}
-      </div>
+    <div className="olm-container">
+      <header className="olm-header">
+        <img src="https://olm.vn/assets/images/logo.png" alt="OLM Bot" className="olm-logo" />
+        <h1>Bot Giải Bài Tập OLM</h1>
+        <p>Chỉ cần dán link bài tập OLM, bot sẽ tự động giải!</p>
+      </header>
+      <main className="olm-main">
+        <form className="olm-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            className="olm-input"
+            placeholder="Dán link bài tập OLM vào đây..."
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            required
+            autoFocus
+          />
+          <button type="submit" className="olm-btn">Giải bài tập</button>
+        </form>
+        <div className="olm-result">
+          {loading ? (
+            <div className="olm-loading">Đang giải...</div>
+          ) : (
+            answer && (
+              <div>
+                <h3>Đáp án:</h3>
+                <div className="olm-answer">{answer}</div>
+              </div>
+            )
+          )}
+        </div>
+      </main>
+      <footer className="olm-footer">
+        <span>© 2025 Bot Giải Bài Tập OLM | Phiên bản thử nghiệm</span>
+      </footer>
     </div>
   );
 }
+
 export default App;
